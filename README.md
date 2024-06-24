@@ -18,6 +18,7 @@ ___
 This is the reproducibility repo for the paper  "Grounding Continuous Representations in Geometry: Equivariant Neural Fields"". All experiments
 in the paper should be reproducible using the code in this repository. Data for the experiments is mostly downloadable via torch-dataloaders. However, the celeb-A dataset should be downloaded via the following [https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html](link). Shapenet data is downloaded via the [https://www.shapenet.org/](shapenet) website. 
 ___
+
 ## Requirements
 
 To install the requirements, we use conda. We recommend creating a new environment for the project.
