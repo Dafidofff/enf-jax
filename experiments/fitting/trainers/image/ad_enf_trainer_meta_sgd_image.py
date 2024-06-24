@@ -25,7 +25,7 @@ class MetaSGDAutoDecodingENFTrainerImage(AutodecodingImageBaseFunctions, MetaSGD
             self=self,
             coords=coords
         )
-        MetaSGDAutoDecodingSNeFTrainer.__init__(
+        MetaSGDAutoDecodingENFTrainer.__init__(
             self=self,
             config=config,
             enf=enf,

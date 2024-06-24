@@ -16,26 +16,26 @@ nef:
   num_out: -1                             # Automatically derived from the dataset
 
   num_self_att_layers: 0
-  num_hidden: 64
+  num_hidden: 128
   num_heads: 2
   condition_value_transform: True
   condition_invariant_embedding: True
 
   latent_dim: 64
-  num_latents: 256
+  num_latents: 144
   top_k: 9
   gaussian_window: -1                          # If None gaussian window is not used, if -1 the value is set proportional to the number of latents.
   optimize_gaussian_window: False              # If True, the gaussian window size is optimized during training
 
   embedding_type: rff                          # Choices, 'rff', 'polynomial', 'ffn'
   embedding_freq_multiplier_invariant: 0.1     # For RFF the 1/std and for polynomial the degree
-  embedding_freq_multiplier_value: 1           # For RFF the 1/std and for polynomial the degree
+  embedding_freq_multiplier_value: 2           # For RFF the 1/std and for polynomial the degree
   invariant_type: rel_pos                      # Choices: 'rel_pos', 'norm_rel_pos', 'abs_pos', 'ponita', 'rel_pos_periodic'
 
 # Training configuration
 training:
-  num_epochs: 300
-  max_num_sampled_points: 512
+  num_epochs: 5000
+  max_num_sampled_points: 1024
 
 # Testing configuration
 test:
@@ -48,7 +48,7 @@ dataset:
   batch_size: 8
   path: './data'
   num_signals_train: 5000
-  num_signals_test: 100
+  num_signals_test: 1000
   num_workers: 0
   image_shape: -1
 

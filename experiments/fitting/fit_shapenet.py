@@ -1,10 +1,7 @@
 import hydra
-from omegaconf import DictConfig
-import omegaconf
 import wandb
-
-import jax.numpy as jnp
-
+import omegaconf
+from omegaconf import DictConfig
 
 from experiments.fitting.datasets import get_dataloader
 from experiments.fitting.trainers.shape.ad_enf_trainer_shape import AutoDecodingENFTrainerShape
@@ -47,7 +44,6 @@ def train(cfg: DictConfig):
 
     # Initialize wandb
     wandb.init(
-        entity="equivariance",
         project="enf-jax",
         name=f"ad_{cfg.dataset.name}",
         dir=cfg.logging.log_dir,

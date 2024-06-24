@@ -54,7 +54,6 @@ def train(cfg: DictConfig):
 
     # Initialize wandb
     wandb.init(
-        entity="equivariance",
         project="enf-jax",
         name=f"ad_{cfg.dataset.name}",
         dir=cfg.logging.log_dir,

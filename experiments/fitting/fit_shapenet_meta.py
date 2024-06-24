@@ -1,19 +1,14 @@
 import hydra
-from omegaconf import DictConfig
-import omegaconf
 import wandb
-
-import numpy as np
-import jax.numpy as jnp
-
-from experiments.fitting.datasets import get_dataloader
-from experiments.fitting.trainers.shape.ad_enf_trainer_meta_shape import MetaAutoDecodingENFTrainerShape
-from experiments.fitting.trainers.shape.ad_enf_trainer_meta_sgd_shape import MetaSGDAutoDecodingENFTrainerShape
+import omegaconf
+from omegaconf import DictConfig
 
 from experiments.fitting import get_model
+from experiments.fitting.datasets import get_dataloader
+from experiments.fitting.trainers.shape.ad_enf_trainer_meta_sgd_shape import MetaSGDAutoDecodingENFTrainerShape
 
 
-@hydra.main(version_base=None, config_path=".", config_name="ad_config_meta_shape")
+@hydra.main(version_base=None, config_path="./configs/", config_name="ad_config_meta_shape")
 def train(cfg: DictConfig):
 
     # Set log dir
@@ -33,7 +28,6 @@ def train(cfg: DictConfig):
 
     # Initialize wandb
     wandb.init(
-        entity="equivariance",
         project="enf-jax",
         name=f"meta_{cfg.dataset.name}_ad",
         dir=cfg.logging.log_dir,
@@ -44,26 +38,15 @@ def train(cfg: DictConfig):
     # Get nef and autodecoders
     nef, inner_autodecoder, outer_autodecoder = get_model(cfg)
 
-    if cfg.meta.meta_sgd:
-        trainer = MetaSGDAutoDecodingENFTrainerShape(
-            nef=nef,
-            inner_autodecoder=inner_autodecoder,
-            outer_autodecoder=outer_autodecoder,
-            config=cfg,
-            train_loader=trainset,
-            val_loader=testset,
-            seed=42,
-        )
-    else:
-        trainer = MetaAutoDecodingENFTrainerShape(
-            nef=nef,
-            inner_autodecoder=inner_autodecoder,
-            outer_autodecoder=outer_autodecoder,
-            config=cfg,
-            train_loader=trainset,
-            val_loader=testset,
-            seed=42,
-        )
+    trainer = MetaSGDAutoDecodingENFTrainerShape(
+        nef=nef,
+        inner_autodecoder=inner_autodecoder,
+        outer_autodecoder=outer_autodecoder,
+        config=cfg,
+        train_loader=trainset,
+        val_loader=testset,
+        seed=42,
+    )
 
     trainer.create_functions()
 

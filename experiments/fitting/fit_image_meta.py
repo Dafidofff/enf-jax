@@ -38,9 +38,8 @@ def train(cfg: DictConfig):
 
     # Initialize wandb
     wandb.init(
-        entity="equivariance",
-        project="debug-enf-jax",
-        name=f"meta_{cfg.dataset.name}_ad",
+        project="enf-jax",
+        name=f"meta_{cfg.dataset.name}",
         dir=cfg.logging.log_dir,
         config=omegaconf.OmegaConf.to_container(cfg),
         mode='disabled' if cfg.logging.debug else 'online',
