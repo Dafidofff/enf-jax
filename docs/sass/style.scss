@@ -1,0 +1,12 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@font-face {
+    font-family: "fragment";
+    src: url("../fonts/Fragment_Mono/FragmentMono-Regular.ttf");
+}
+@font-face {
+    font-family: "dm";
+    src: url("../fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf");
+  }

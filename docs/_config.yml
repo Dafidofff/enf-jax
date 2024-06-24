@@ -1,0 +1,18 @@
+title: ENF
+author:
+  - {name: "David Wessels*", email: "d.r.wessels@uva.nl", affiliation: "University of Amsterdam"}
+  - {name: "David M. Knigge*", email: "d.m.knigge@uva.nl", affiliation: "University of Amsterdam"}
+paper_authors:
+  - {name: "David Wessels*", email: "d.r.wessels@uva.nl", affiliation: "University of Amsterdam"}
+  - {name: "David M. Knigge*", email: "d.m.knigge@uva.nl", affiliation: "University of Amsterdam"}
+  - { name: "Riccardo Valperga", email: "r.valperga@uva.nl", affiliation: "University of Amsterdam" }
+  - { name: "Samuele Papa", email: "s.papa@uva.nl", affiliation: "University of Amsterdam" }
+  - { name: "Sharvaree Vadgama", email: "s.vadgama@uva.nl", affiliation: "University of Amsterdam" }
+  - { name: "Efstratios Gavves", email: "e.gavves@uva.nl", affiliation: "University of Amsterdam" }
+  - { name: "Erik J. Bekkers", email: "e.j.bekkers@uva.nl", affiliation: "University of Amsterdam" }
+description: > # this means to ignore newlines until "show_excerpts:"
+  Equivariant Neural Fields for Geometry Grounded Continuous Representations.
+
+plugins:
+ - jekyll-feed
+ - jekyll-seo-tag

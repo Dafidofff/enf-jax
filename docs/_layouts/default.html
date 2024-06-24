@@ -1,0 +1,112 @@
+---
+---
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- seo tags -->
+  {% seo %}
+
+  <!-- include favicon -->
+  <link rel="icon" href="assets/img/logo/favicon.ico">
+  <link rel="stylesheet" href="assets/css/style.css">
+
+<script type="text/javascript">
+  window.MathJax = {
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  };
+</script>
+  <script type="text/javascript"
+          src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_HTML">
+  </script>
+
+</head>
+
+<body>
+<main class="page-content relative flex flex-col items-center text-emerald-950 font-light font-sans " aria-label="Content">
+  <h1 class="mt-16 mb-4 text-4xl md:text-5xl max-w-screen-lg text-center">Grounding Continuous Representations in Geometry</h1>
+  <h1 class="text-3xl md:text-4xl max-w-screen-sm text-center">Equivariant Neural Fields</h1>
+
+  {%- if site.paper_authors %}
+  <div class="flex flex-row flex-wrap justify-center max-w-xl m-10">
+        {% for author in site.paper_authors %}
+          <div class="flex flex-col items-center m-1 md:m-2">
+            {% if author.name -%}
+              <span class="font-bold tracking-tighter"> {{ author.name | escape }} </span>
+            {% endif -%}
+            {% if author.email -%}
+              <a class="font-mono text-sm text-blue-600" href="mailto:{{ author.email }}">{{ author.email }}</a>
+            {%- endif %}
+            {% if author.affiliation -%}
+              <span class="text-sm italic">{{ author.affiliation }}</span>
+            {%- endif %}
+          </div>
+        {% endfor %}
+  </div>
+  {%- endif %}
+  <div class="font-extralight italic text-sm -mt-5 mb-10">* equal contribution</div>
+
+  <div class="flex flex-row max-w-md space-x-4 items-center flex-wrap">
+    <a class="flex flex-col items-center text-sm space-x-2 cursor-pointer w-16 text-center" href="https://arxiv.org/abs/2406.05753" target="_blank"> <img src="assets/img/logo/arxiv.png" width="36px"> this paper on ArXiv </a>
+    <a class="flex flex-col items-center text-sm space-x-2 cursor-pointer w-16 text-center" href="https://github.com/dafidofff/enf" target="_blank"> <img src="assets/img/logo/github.png" width="18px"> code for experiments </a>
+    <a class="flex flex-col items-center text-sm space-x-2 cursor-pointer w-16 text-center" href="https://github.com/david-knigge/enf-min-jax" target="_blank"> <img src="assets/img/logo/github.png" width="18px"> enf-min-jax </a>
+  </div>
+
+  <div class="flex flex-col bg-white my-10 sm:max-w-screen-sm md:max-w-screen-lg drop-shadow-md">
+    <img src="assets/img/paper-figs/fig-1.png" class="w-full h-auto" alt="placeholder">
+  </div>
+
+  <div class="flex flex-col md:max-w-screen-sm">
+    <div class="flex flex-col p-4 bg-slate-50">
+      <h2 class="text-2xl font-bold mb-2">Summary</h2>
+      <p class="break-words mb-2">
+        We introduce Equivariant Neural Fields (ENFs), a new class of Conditional Neural Fields that ground continuous representations
+        in geometry. A signal $f_i$ is represented as a localized set of tuples $z:=\{(p_i, \mathbf{c}_i)\}_{i=1}^N$ in a latent space, each of which
+        consist of a pose $p_i$ and a context vector $c_i$. The latent space can be equipped with a group action,
+        making the representation equivariant to transformations of choice - a desirable property in many learning tasks.
+      </p>
+      <p class="break-words">
+        We show that ENF representations - trained fully self-supervised - are geometrically interpretable and editable. We demonstrate
+        their effectiveness as a representation in downstream tasks, improving downstream image classification over existing methods.
+      </p>
+    </div>
+
+    <div class="flex flex-col md:max-w-screen-md mt-10 mt-8 p-4">
+      <h2 class="text-2xl font-bold mb-2">Resources</h2>
+      <p> If you would like to learn more about ENFs, we compiled a list of resources that you might find useful.</p>
+      <ul class="list-none list-inside mt-4 space-y-2">
+        <!-- <li class="text-md"><a href="https://davidmknigge.nl/enf-blogpost" target="_blank" class="flex flex-row items-center p-2 bg-slate-50"><img class="w-5 h-5 mr-2" src="assets/img/logo/favicon.ico">Blogpost: Intro to Equivariant Neural Fields</a></li> -->
+        <li class="text-md"><a href="https://colab.research.google.com/gist/david-knigge/8e38ace480e2fe19cfe52e2570e639dc/explainer_enf.ipynb" target="_blank" class="flex flex-row items-center p-2 border border-slate-50 grayscale"><img class="w-5 h-5 mr-2" src="assets/img/logo/colab_favicon_256px.png">Notebook: Implementing ENF from scratch for classification</a></li>
+        <li class="text-md"><a href="https://github.com/david-knigge/enf-min-jax" target="_blank" class="flex flex-row items-center bg-slate-50 p-2"><img class="w-5 h-5 mr-2" src="assets/img/logo/github.png">enf-min-jax: A minimal implementation easily extensible for your own research</a></li>
+      </ul>
+      <p class="mt-8">Applications of ENFs:</p>
+      <ul class="list-none list-inside mt-4 space-y-2">
+        <li class="text-md"><a href="https://davidmknigge.nl/enf-pde-page" target="_blank" class="flex flex-row items-center p-2 border border-slate-50 grayscale"><img class="w-5 h-5 mr-2" src="assets/img/logo/favicon.ico">Space-Time Continuous PDE Forecasting using Equivariant Neural Fields</a></li>      </ul>
+      <p class="mt-2">Any other questions, comments or criticisms? Feel free to reach out to us over email (<a class="text-blue-600" href="mailto:d.m.knigge@uva.nl">d.r.wessels@uva.nl</a>, <a class="text-blue-600" href="mailto:d.m.knigge@uva.nl">d.m.knigge@uva.nl</a>) or on Twitter
+        (<a class="text-blue-600" href="https://x.com/Dafidofff" target="_blank">@dafidofff</a>, <a class="text-blue-600" href="https://x.com/davidmknigge" target="_blank">@davidmknigge</a>)
+        we're always down to chat about equivariance, neural fields, or anything else that piques your interest.
+      </p>
+    </div>
+
+    <div class="flex flex-col mt-8  p-4">
+      <h2 class="font-bold text-2xl mb-2">Citing</h2>
+      <p class="text-sm md">If you found this work useful, and should you like to reference it,
+        please use the following citation.</p>
+          <pre class="text-xs citation mt-4 p-2 bg-slate-200 overflow-x-scroll max-w-48 md:max-w-full"><code>@article{wessels2024grounding,
+  title={Grounding Continuous Representations in Geometry: Equivariant Neural Fields},
+  author={Wessels, David R and Knigge, David M and Papa, Samuele and Valperga, Riccardo
+          and Vadgama, Sharvaree and Gavves, Efstratios and Bekkers, Erik J},
+  journal={arXiv preprint arXiv:2406.05753},
+  year={2024}
+}</code></pre>
+    </div>
+  </div>
+</main>
+</body>
+
+</html>
