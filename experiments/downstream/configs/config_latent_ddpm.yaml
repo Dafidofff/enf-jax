@@ -1,0 +1,64 @@
+# checkpoint_dir: '/home/davidwessels/Documents/code/SNeF-jax/outputs/2024-04-19/14-39-21'
+# checkpoint_dir: '/home/davidwessels/Documents/code/SNeF-jax/outputs/2024-04-24/nl4-ld8'
+# checkpoint_dir: '/home/davidwessels/Documents/code/SNeF-jax/outputs/2024-04-24/nl9-ld4'
+# checkpoint_dir: '/home/davidwessels/Documents/code/SNeF-jax/outputs/2024-04-25/nl1-ld32'
+# checkpoint_dir: '/home/davidwessels/Documents/code/SNeF-jax/outputs/2024-04-27/cifar10'
+# checkpoint_dir: '/home/davidwessels/Documents/code/SNeF-jax/outputs/mnist_rel_pos_test_4nl'
+# checkpoint_dir: '/home/davidwessels/Documents/code/SNeF-jax/outputs/minst_relpos_4nl_8ld'
+checkpoint_dir: '/home/davidwessels/Documents/code/SNeF-jax/outputs/experiments_enf_shapenet/shapenet_full'
+latent_dataset_path: ''
+seed: 0
+
+logging:
+  log_dir: ''                            # Use optuna's log directory if empty
+  log_every_n_steps: 100
+  checkpoint_every_n_epochs: 50
+  visualise_every_n_epoch: 100
+  keep_n_checkpoints: 1
+  checkpoint: True
+  debug: False
+
+ponita:
+  num_hidden: 128
+  num_layers: 4
+  num_ori: 1
+  basis_dim: 256
+  degree: 3
+  widening_factor: 4
+  kernel_size: 0.25
+  dropout_rate: 0.0
+  
+  time_embedding_dim: 32
+
+diffusion:
+  T: 1000
+  beta_1: 1e-4
+  beta_T: 0.02
+
+optimizer:
+  learning_rate: 1e-4
+  weight_decay: 0.0
+
+latent_dataset:
+  load: True
+  store_if_new: False
+  augmentations:
+    perturb_pos: 0.0
+    perturb_a: 0.0
+    drop_a: 0.0
+  normalize: True
+  image_shape: None           # Will be overwritten by the dataset
+
+dataset:
+  name: ''                               # If empty, use the same dataset as was used to fit the model
+  path: '/media/davidwessels/ananas/data/ShapeNetSDF'
+  num_signals_train: 34980
+  num_signals_test: 1000
+  image_shape: None           # Will be overwritten by the dataset
+
+training:
+  num_epochs: 10000
+  batch_size: 8
+
+test:
+  test_interval: 1

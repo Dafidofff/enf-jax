@@ -1,0 +1,21 @@
+defaults:
+  - ad_config_shape
+  - _self_
+
+meta:
+  meta_sgd: True
+  inner_learning_rate_p: 0.1
+  inner_learning_rate_c: 5
+  inner_learning_rate_window: 0.1
+  learning_rate_meta_sgd: 1e-4
+  noise_pos_inner_loop: 0.0
+
+  # Below only used if meta_sgd is False
+  inner_learning_rate: 1.0
+
+training:
+  num_inner_steps: 3
+
+optimizer:
+  learning_rate_enf: 1e-4
+  learning_rate_codes: 0.0

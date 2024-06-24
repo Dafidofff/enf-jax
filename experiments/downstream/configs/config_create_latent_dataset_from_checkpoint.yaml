@@ -1,0 +1,19 @@
+checkpoint_dir: 'outputs/2024-06-24/21-02-12'
+seed: 0
+
+logging:
+  log_dir: ''                            # Use optuna's log directory if empty
+  debug: False
+
+dataset:
+  name: ''                                # If empty, use the same dataset as was used to fit the model
+  num_signals_train: 5000
+  num_signals_test: 1000
+
+training:
+  fit_codes_num_epochs: 200
+  batch_size: 16
+
+latent_dataset:
+  load: False
+  store_if_new: True

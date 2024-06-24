@@ -1,0 +1,1 @@
+from experiments.fitting.trainers.shape.utils.extract_mesh import extract_mesh_from_neural_field

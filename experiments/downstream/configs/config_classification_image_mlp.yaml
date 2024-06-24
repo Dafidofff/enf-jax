@@ -1,0 +1,30 @@
+checkpoint_dir: './outputs/2024-06-24/21-02-12'
+seed: 0
+
+logging:
+  log_dir: ''                            # Use optuna's log directory if empty
+  log_every_n_steps: 500
+  checkpoint_every_n_epochs: 50
+  keep_n_checkpoints: 1
+  checkpoint: True
+  debug: False
+
+# Classifier config
+classifier:
+  num_hidden: 256
+  dropout_rate: 0.0
+
+optimizer:
+  learning_rate: 1e-3
+  weight_decay: 0.0
+
+dataset:
+  num_signals_train: 10000
+  num_signals_test: 10000
+
+training:
+  num_epochs: 100
+  batch_size: 16
+
+test:
+  test_interval: 1

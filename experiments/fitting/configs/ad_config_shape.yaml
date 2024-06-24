@@ -1,0 +1,62 @@
+seed: 0
+device: None                              # Set to 'cpu' or 'cuda' to override automatic device selection
+
+logging:
+  log_dir: ''                            # Use optuna's log directory if empty
+  log_every_n_steps: 10
+  visualize_every_n_steps: 1000
+  num_logged_samples: 4
+  checkpoint_every_n_epochs: 10
+  keep_n_checkpoints: 1
+  checkpoint: False
+  debug: False
+
+
+nef:
+  num_in: -1                              # Automatically derived from the dataset
+  num_out: -1                             # Automatically derived from the dataset
+
+  self_att_num_layers: 0
+  num_hidden: 128
+  num_heads: 2
+  condition_value_transform: True
+  condition_invariant_embedding: True
+
+  latent_dim: 8
+  num_latents: 27
+  gaussian_window: -1                          # Value is calculated from number of latents, if None gaussian window is not used, if -1 the value is set proportional to the number of latents.
+  optimize_gaussian_window: False              # If True, the gaussian window size is optimized during training
+
+  embedding_type: rff                         # Choices: 'rff', 'polynomial', 'ffn'
+  embedding_freq_multiplier_invariant: 0.1     # For SIREN this is the omega value, for RFF the 1/std and for polynomial the degree
+  embedding_freq_multiplier_value: 0.1        # For SIREN this is the omega value, for RFF the 1/std and for polynomial the degree
+  invariant_type: rel_pos                       # Choices: 'rel_pos', 'norm_rel_pos', 'abs_pos', 'ponita', 'rel_pos_periodic'
+
+# Training configuration
+training:
+  num_epochs: 100000
+  max_num_sampled_points: 15000
+  surf_delta_clamp: 0.1
+
+# Testing configuration
+test:
+  test_interval: 4000
+  min_num_epochs: 200
+
+# Dataset configuration
+dataset:
+  name: shapenet_sdf
+  batch_size: 1
+  path: '/media/davidwessels/ananas/data/ShapeNetSDF/'
+  num_signals_train: 128
+
+  num_signals_test: 2
+  max_num_sampled_points: ${training.max_num_sampled_points}
+  num_workers: 0
+  image_shape: -1
+
+# Arguments specific to autodecoding
+optimizer:
+  name: adamw
+  learning_rate_snef: 1e-4
+  learning_rate_codes: 1e-3

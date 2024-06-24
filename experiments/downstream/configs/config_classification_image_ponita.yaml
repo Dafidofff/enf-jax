@@ -1,0 +1,43 @@
+checkpoint_dir: 'outputs/2024-06-24/21-02-12'
+
+latent_dataset_path: ''
+seed: 0
+
+logging:
+  log_dir: ''                            # Use optuna's log directory if empty
+  log_every_n_steps: 500
+  checkpoint_every_n_epochs: 50
+  keep_n_checkpoints: 1
+  checkpoint: True
+  debug: False
+
+# Classifier config
+classifier:
+  num_hidden: 128
+  num_layers: 4
+  basis_dim: 128
+  widening_factor: 4
+  degree: 3
+  num_ori: 1
+  kernel_size: 0.25
+#  kernel_size: "global"
+
+optimizer:
+  learning_rate: 0.001
+  weight_decay: 1e-3
+
+latent_dataset:
+  load: True
+  store_if_new: False
+  augmentations:
+    perturb_pos: .1
+    perturb_a: .1
+    drop_a: 0.34
+  normalize: True
+
+training:
+  num_epochs: 300
+  batch_size: 32
+
+test:
+  test_interval: 1

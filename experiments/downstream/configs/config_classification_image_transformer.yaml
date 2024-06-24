@@ -1,0 +1,39 @@
+checkpoint_dir: '/home/davidknigge/Documents/GitHub/SNeF-jax/outputs/2024-04-17/16-18-39/'
+seed: 0
+
+logging:
+  log_dir: ''                            # Use optuna's log directory if empty
+  log_every_n_steps: 500
+  checkpoint_every_n_epochs: 50
+  keep_n_checkpoints: 1
+  checkpoint: True
+  debug: False
+
+# Classifier config
+classifier:
+  num_hidden: 128
+  num_layers: 4
+  num_heads: 2
+  kernel_size: 0.2
+#  kernel_size: "global"
+
+optimizer:
+  learning_rate: 1e-3
+  weight_decay: 0.0
+
+latent_dataset:
+  load: True
+  store_if_new: False
+  augmentations:
+    perturb_pos: 0.0
+    perturb_a: 0.0
+    drop_a: 0.0
+  normalize: True
+
+training:
+  num_epochs: 300
+  batch_size: 32
+  fit_codes_num_epochs: 20
+
+test:
+  test_interval: 1
