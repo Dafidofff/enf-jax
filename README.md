@@ -49,7 +49,7 @@ pip install -e .
 We list relevant components of the repository here:
 - `enf/` contains the code for the Equivariant Neural Field.
 - `enf/steerable_attention/invariant/` contains the code for the bi-invariants used in the experiments.
-- `experiments/fitting/` contains the code for all experiments in the paper.
+- `experiments/` contains the code for all experiments in the paper.
 
 
 
