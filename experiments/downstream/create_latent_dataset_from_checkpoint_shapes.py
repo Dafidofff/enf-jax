@@ -7,7 +7,6 @@ import jax.numpy as jnp
 
 from experiments.fitting.datasets import get_dataloader
 from experiments.fitting.trainers.shape.ad_enf_trainer_shape import AutoDecodingENFTrainerShape
-from experiments.fitting.trainers.shape.ad_enf_trainer_meta_shape import MetaAutoDecodingENFTrainerShape
 from experiments.fitting.trainers.shape.ad_enf_trainer_meta_sgd_shape import MetaSGDAutoDecodingENFTrainerShape
 
 from experiments.fitting import get_model
@@ -63,28 +62,16 @@ def create_latent_dataset_from_checkpoint(conf: DictConfig):
         )
     else:
         # Get nef and autodecoders
-        nef, inner_autodecoder, outer_autodecoder = get_model(enf_cfg)
-
-        if enf_cfg.meta.meta_sgd:
-            enf_trainer = MetaSGDAutoDecodingENFTrainerShape(
-                enf=enf,
-                inner_autodecoder=inner_autodecoder,
-                outer_autodecoder=outer_autodecoder,
-                config=enf_cfg,
-                train_loader=trainset,
-                val_loader=testset,
-                seed=42,
-            )
-        else:
-            enf_trainer = MetaAutoDecodingENFTrainerShape(
-                enf=enf,
-                inner_autodecoder=inner_autodecoder,
-                outer_autodecoder=outer_autodecoder,
-                config=enf_cfg,
-                train_loader=trainset,
-                val_loader=testset,
-                seed=42,
-            )
+        enf, inner_autodecoder, outer_autodecoder = get_model(enf_cfg)
+        enf_trainer = MetaSGDAutoDecodingENFTrainerShape(
+            enf=enf,
+            inner_autodecoder=inner_autodecoder,
+            outer_autodecoder=outer_autodecoder,
+            config=enf_cfg,
+            train_loader=trainset,
+            val_loader=testset,
+            seed=42,
+        )
 
     enf_trainer.create_functions()
 

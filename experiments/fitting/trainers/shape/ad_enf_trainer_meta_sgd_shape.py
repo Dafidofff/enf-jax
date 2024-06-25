@@ -5,10 +5,10 @@ import optax
 from functools import partial
 
 from experiments.fitting.trainers.shape._ad_shape_base_functions import AutodecodingShapeBaseFunctions
-from experiments.fitting.trainers._base._ad_enf_trainer_meta_sgd import MetaSGDAutoDecodingSNeFTrainer
+from experiments.fitting.trainers._base._ad_enf_trainer_meta_sgd import MetaSGDAutoDecodingENFTrainer
 
 
-class MetaSGDAutoDecodingSNeFTrainerShape(AutodecodingShapeBaseFunctions, MetaSGDAutoDecodingSNeFTrainer):
+class MetaSGDAutoDecodingENFTrainerShape(AutodecodingShapeBaseFunctions, MetaSGDAutoDecodingENFTrainer):
 
     def __init__(
             self,
@@ -23,7 +23,7 @@ class MetaSGDAutoDecodingSNeFTrainerShape(AutodecodingShapeBaseFunctions, MetaSG
         AutodecodingShapeBaseFunctions.__init__(
             self=self,
         )
-        MetaSGDAutoDecodingSNeFTrainer.__init__(
+        MetaSGDAutoDecodingENFTrainer.__init__(
             self=self,
             config=config,
             nef=nef,

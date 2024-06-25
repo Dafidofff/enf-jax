@@ -1,16 +1,18 @@
+from pathlib import Path
+from functools import partial
+
+from torch.utils.data import DataLoader
+import numpy as np
+from typing import Any, Sequence, Union
+
+
 from experiments.downstream.latent_dataset.latent_dataset import (
     LatentDataset,
     perturb_positions,
     perturb_appearance,
     drop_latents
 )
-from experiments.downstream.latent_dataset.utils import get_or_create_latent_dataset_from_snef, get_latent_dataset
-
-from torch.utils.data import DataLoader
-import numpy as np
-from typing import Any, Sequence, Union
-import pathlib
-from functools import partial
+from experiments.downstream.latent_dataset.utils import get_or_create_latent_dataset_from_enf, get_latent_dataset
 
 
 def numpy_collate(batch: Union[np.ndarray, Sequence[Any], Any]):
@@ -46,7 +48,7 @@ def get_augmentations(cfg):
             train_transforms.append(partial(perturb_positions, perturbation_scale=p_scale))
         elif k == "perturb_a":
             p_scale = cfg.latent_dataset.augmentations[k]
-            train_transforms.append(partial(perturb_positions, perturbation_scale=p_scale))
+            train_transforms.append(partial(perturb_appearance, perturbation_scale=p_scale))
         elif k == "drop_a":
             p_drop = cfg.latent_dataset.augmentations[k]
             train_transforms.append(partial(drop_latents, drop_rate=p_drop))
@@ -54,10 +56,10 @@ def get_augmentations(cfg):
     return train_transforms, val_transforms
 
 
-def get_latent_dataloader_from_snef(cfg, snef_state=None, snef_trainer=None):
+def get_latent_dataloader_from_enf(cfg, enf_state=None, enf_trainer=None):
     # Get dataset of latents
-    train_latents, val_latents, train_labels, val_labels = get_or_create_latent_dataset_from_snef(
-        cfg, snef_state, snef_trainer
+    train_latents, val_latents, train_labels, val_labels = get_or_create_latent_dataset_from_enf(
+        cfg, enf_state, enf_trainer
     )
 
     # Get augmentations optionally
@@ -88,7 +90,7 @@ def get_latent_dataloader_from_snef(cfg, snef_state=None, snef_trainer=None):
 
 def get_latent_dataloader_from_path(cfg, path):
     # Get stored latents.
-    train_latents, val_latents, train_labels, val_labels = get_latent_dataset(pathlib.Path(path))
+    train_latents, val_latents, train_labels, val_labels = get_latent_dataset(Path(path))
 
     # Get augmentations optionally
     train_transforms, val_transforms = get_augmentations(cfg)
