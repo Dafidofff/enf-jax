@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-purple)](https://opensource.org/licenses/MIT)
 [![Python](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/release/python-3110/)
 [![jax_badge][jax_badge_link]](https://github.com/google/jax)
-[![badge](https://img.shields.io/badge/ArXiv-2406.06660-b31b1b?logo=arxiv&logoColor=b31b1b)](https://arxiv.org/abs/2406.06660)
+[![badge](https://img.shields.io/badge/ArXiv-2406.06660-b31b1b?logo=arxiv&logoColor=b31b1b)](https://arxiv.org/abs/2406.05753)
 
 
 
@@ -15,7 +15,7 @@
 
 ___
 ## Overview
-This is the reproducibility repo for the paper  "Grounding Continuous Representations in Geometry: Equivariant Neural Fields"". All experiments
+This is the reproducibility repo for the paper  "Grounding Continuous Representations in Geometry: Equivariant Neural Fields". All experiments
 in the paper should be reproducible using the code in this repository. Data for the experiments is mostly downloadable via torch-dataloaders. However, the celeb-A dataset should be downloaded via the following [https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html](link). Shapenet data is downloaded via the [https://www.shapenet.org/](shapenet) website. 
 
 ___
