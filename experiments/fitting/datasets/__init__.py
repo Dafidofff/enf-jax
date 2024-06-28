@@ -6,6 +6,7 @@ from experiments.fitting.datasets.shapenet_with_id import ShapeNet
 from experiments.fitting.datasets.aug_cifar_with_id import AugmentedCIFAR10WithID
 from experiments.fitting.datasets.shapenet_sdf_with_id import ShapeNetSDF
 from experiments.fitting.datasets.dft_with_id import DFTWithID
+from experiments.fitting.datasets.imagenet_with_id import ImageNetWithID
 
 from typing import Union, Any, Sequence
 
@@ -70,6 +71,11 @@ def get_dataloader(dataset_cfg):
             transform=transforms,
             download=True,
         )
+
+    elif dataset_cfg.name == "imagenet":
+
+        train_dset = ImageNetWithID(dataset_cfg.path, split='train')
+        test_dset = ImageNetWithID(dataset_cfg.path, split='val')
 
     elif dataset_cfg.name == "celeba":
 

@@ -23,9 +23,9 @@ def get_embedding(embedding_type: str, num_in: int, num_hidden: int, num_emb_dim
 
     """
     if embedding_type == "rff":
-        # return RFFNet(in_dim=num_in, output_dim=num_emb_dim, hidden_dim=num_hidden, num_layers=2,
-        #               learnable_coefficients=False, std=freq_multiplier)
-        return RFFEmbedding(hidden_dim=num_hidden, learnable_coefficients=True, std=freq_multiplier)
+        return RFFNet(in_dim=num_in, output_dim=num_emb_dim, hidden_dim=num_hidden, num_layers=2,
+                      learnable_coefficients=False, std=freq_multiplier)
+        # return RFFEmbedding(hidden_dim=num_hidden, learnable_coefficients=True, std=freq_multiplier)
     elif embedding_type == "ffn":
         return FFNEmbedding(num_hidden=num_hidden, num_out=num_emb_dim)
     elif embedding_type == "polynomial":

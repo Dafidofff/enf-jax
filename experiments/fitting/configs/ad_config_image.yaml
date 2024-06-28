@@ -22,8 +22,8 @@ nef:
   condition_invariant_embedding: True
 
   latent_dim: 64
-  num_latents: 144
-  top_k: 9
+  num_latents: 169
+  top_k: 4
   gaussian_window: -1                          # If None gaussian window is not used, if -1 the value is set proportional to the number of latents.
   optimize_gaussian_window: False              # If True, the gaussian window size is optimized during training
 
@@ -35,7 +35,7 @@ nef:
 # Training configuration
 training:
   num_epochs: 5000
-  max_num_sampled_points: 1024
+  max_num_sampled_points: 10000
 
 # Testing configuration
 test:
@@ -44,10 +44,11 @@ test:
 
 # Dataset configuration
 dataset:
-  name: stl10
-  batch_size: 8
-  path: './data'
-  num_signals_train: 5000
+  name: imagenet
+  batch_size: 2
+  # path: './data'
+  path: '/media/data/imagenet-object-localization-challenge'
+  num_signals_train: 10000
   num_signals_test: 1000
   num_workers: 0
   image_shape: -1

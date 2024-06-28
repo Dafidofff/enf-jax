@@ -19,7 +19,6 @@ class RFFNet(nn.Module):
 
         # Encoding
         self.encoding = RFFEmbedding(
-            in_dim=self.in_dim,
             hidden_dim=self.hidden_dim,
             learnable_coefficients=self.learnable_coefficients,
             std=self.std,

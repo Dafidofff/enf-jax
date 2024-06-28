@@ -133,6 +133,64 @@ class MetaSGDAutoDecodingENFTrainerImage(AutodecodingImageBaseFunctions, MetaSGD
             inner_state.params,
             masked_coords=masked_coords,
             masked_img=masked_img), inner_state
+    
+
+    def validate_epoch(self, state):
+        """ Validates the model. Since we're doing autodecoding, requires
+            training a validation autodecoder from scratch.
+
+        Args:
+            state: The current training state.
+        Returns:
+            state: The updated training state.
+        """
+        # Initialize autodecoder
+        key, init_key = jax.random.split(state.rng)
+        autodecoder_params = state.params['autodecoder']
+
+        # Create validation state
+        val_state = state.replace(
+            params={'enf': state.params['enf'], 'autodecoder': autodecoder_params,
+                    'meta_sgd_lrs': state.params['meta_sgd_lrs']},
+            autodecoder_opt_state=self.autodecoder_opt.init(autodecoder_params),
+            rng=key
+        )
+
+        self.total_val_epochs = max(self.epoch, self.config.test.min_num_epochs)
+        self.global_val_step = 0
+        # Loop over batches
+        for epoch in range(1, self.total_val_epochs):
+            losses = 0
+            self.val_epoch = epoch
+
+            for batch_idx, batch in enumerate(self.val_loader):
+                loss, val_state = self.val_step(val_state, batch)
+                losses += loss
+
+                # Log every n steps
+                if batch_idx % self.config.logging.log_every_n_steps == 0:
+                    self.metrics['val_loss'] = loss
+                    self.update_prog_bar(step=batch_idx, train=False)
+
+                if self.global_val_step % self.config.logging.visualize_every_n_steps == 0:
+                    self.visualize_batch(val_state, batch, name='val/recon-fitting', train=False)
+                
+                # Increment global val step
+                self.global_val_step += 1
+
+        # Reset val epoch
+        self.val_epoch = 0
+        self.total_val_epochs = 0
+        self.global_val_step = 0
+
+        # Visualize last batch
+        self.visualize_batch(val_state, batch, name='val/recon-final', train=False)
+
+        # Update epoch loss by last loss
+        self.metrics['val_mse_epoch'] = losses / len(self.val_loader)
+        wandb.log({'val_mse_epoch': self.metrics['val_mse_epoch']}, commit=False)
+        return val_state
+    
 
     def visualize_batch(self, state, batch, name):
         """ Visualize the results of the model on a batch of data.
